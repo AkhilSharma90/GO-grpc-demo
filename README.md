@@ -39,8 +39,16 @@ go mod tidy
 
 5. Generate .pb.go files from the proto file
 
+depending on what path you mention in your greet.proto file, you will either run this - 
+
 ```bash
-protoc --go_out=. --go_opt=paths=source_relative \ --go-grpc_out=. --go-grpc_opt=paths=source_relative \ proto/greet.proto
+protoc --go_out=. --go-grpc_out=. proto/greet.proto
+```
+OR this -
+
+```bash
+protoc --go_out=. --go_opt=module=github.com/akhil/basic-go-grpc --go-grpc_out=. --go-grpc_opt=module=githu
+b.com/akhil/basic-go-grpc proto/greet.proto
 ```
 
 6. Create the server and client directories and create the main.go files with necessary controllers and services
