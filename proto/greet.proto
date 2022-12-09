@@ -1,0 +1,42 @@
+// for syntax highlighting we use proto3 version
+syntax="proto3";
+
+// path to our current folder, where the generated files will be placed
+option go_package = "./proto";
+
+// package name for our proto file
+package greet_service;
+
+// defining all the Services for the gRPC
+service GreetService {
+    // simple RPC
+    rpc SayHello(NoParam) returns (HelloResponse);
+    // server streaming RPC
+    rpc SayHelloServerStreaming(NamesList) returns (stream HelloResponse);
+    // client streaming RPC
+    rpc SayHelloClientStreaming(stream HelloRequest) returns (MessagesList);
+    // bidirectional streaming RPC
+    rpc SayHelloBidirectionalStreaming(stream HelloRequest) returns (stream HelloResponse);
+}
+
+// when you are not passing any params still you will need to add a type
+// NoParam acts as a type for no parameters given.
+message NoParam {};
+
+message HelloRequest {
+    string name = 1;
+}
+
+message HelloResponse {
+    string message = 1;
+}
+
+message NamesList {
+    repeated string names = 1;
+}
+
+message MessagesList {
+    repeated string messages = 1;
+}
+
+
